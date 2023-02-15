@@ -11,7 +11,7 @@ class FewShotClassifier(nn.Module):
     Abstract class providing methods usable by all few-shot classification algorithms
     """
 
-    def __init__(self, backbone: nn.Module, use_softmax: bool = False):
+    def __init__(self, backbone: nn.Module, use_softmax: bool = False, input_shape: int = 224):
         """
         Initialize the Few-Shot Classifier
         Args:
@@ -22,7 +22,7 @@ class FewShotClassifier(nn.Module):
         super().__init__()
 
         self.backbone = backbone
-        self.backbone_output_shape = compute_backbone_output_shape(backbone)
+        self.backbone_output_shape = compute_backbone_output_shape(backbone, input_shape)
         self.feature_dimension = self.backbone_output_shape[0]
 
         self.use_softmax = use_softmax
